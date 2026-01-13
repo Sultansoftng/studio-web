@@ -31,40 +31,41 @@ const Testimonials = () => {
       </h2>
 
       <div className="space-y-10">
-        {testimonials.map((item, index) => (
+        {testimonials.map((testimonial, index) => (
           <div
             key={index}
             className="bg-white rounded-2xl shadow-[0_0_40px_rgba(0,0,0,0.12)] p-6 md:p-10 flex flex-col md:flex-row items-start gap-6"
           >
-            {/* Large Image */}
             <div className="relative">
               <img
-                src={item.large}
+                src={testimonial.large}
                 alt="client main"
                 className="w-[220px] h-[180px] md:w-[260px] md:h-[200px] rounded-xl object-cover"
               />
-
-              {/* Small Overlay Image */}
+              
               <img
-                src={item.small}
+                src={testimonial.small}
                 alt="client small"
                 className="w-20 h-20 rounded-xl object-cover absolute bottom-[-20px] right-[-20px] shadow-lg border-4 border-white"
               />
             </div>
 
-            {/* Text Area */}
             <div className="flex-1 pt-6 md:pt-0">
               <h3 className="text-2xl font-semibold text-[#1e1f4b]">
-                {item.name}
+                {testimonial.name}
               </h3>
 
-              <p className="text-[#6b7280] text-sm mb-3">{item.username}</p>
-
-              <p className="text-[#475569] leading-relaxed mb-3">
-                {item.text}
+              <p className="text-[#6b7280] text-sm mb-3">
+                {testimonial.username}
               </p>
 
-              <p className="text-yellow-500 font-semibold">{item.rating}</p>
+              <p className="text-[#475569] leading-relaxed mb-3">
+                {testimonial.text}
+              </p>
+
+              <p className="text-yellow-500 font-semibold">
+                {testimonial.rating}
+              </p>
             </div>
           </div>
         ))}

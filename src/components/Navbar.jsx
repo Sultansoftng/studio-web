@@ -1,9 +1,18 @@
 import React, { useState } from "react";
 import logo from "../assets/logoo.png";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const links = ["Home", "Services", "Studio Gallery", "Bookings", "About", "Contact"];
+  
+  const navItems = [
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: "Studio Gallery", path: "/gallery" },
+    { name: "Bookings", path: "/bookings" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" }
+  ];
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -13,20 +22,26 @@ const Navbar = () => {
     <nav className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
       <div className="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
         {/* Logo */}
-        <div className="flex-shrink-0">
+        <NavLink to="/" className="flex-shrink-0">
           <img src={logo} alt="Logo" className="h-10" />
-        </div>
+        </NavLink>
 
         {/* Desktop Links */}
         <div className="hidden md:flex space-x-8">
-          {links.map((link, index) => (
-            <a
+          {navItems.map((item, index) => (
+            <NavLink
               key={index}
-              href={`#${link.toLowerCase().replace(/\s+/g, "")}`}
-              className="text-gray-800 hover:text-red-600 font-medium transition"
+              to={item.path}
+              className={({ isActive }) => 
+                `font-medium transition ${
+                  isActive 
+                    ? "text-red-600 border-b-2 border-red-600" 
+                    : "text-gray-800 hover:text-red-600"
+                }`
+              }
             >
-              {link}
-            </a>
+              {item.name}
+            </NavLink>
           ))}
         </div>
 
@@ -35,6 +50,7 @@ const Navbar = () => {
           <button
             onClick={toggleMenu}
             className="text-gray-800 focus:outline-none"
+            aria-label="Toggle menu"
           >
             {isOpen ? (
               // Close icon
@@ -53,7 +69,6 @@ const Navbar = () => {
                 />
               </svg>
             ) : (
-              // Hamburger icon
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -77,15 +92,21 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-white shadow-md">
           <div className="px-4 pt-2 pb-4 space-y-2 flex flex-col">
-            {links.map((link, index) => (
-              <a
+            {navItems.map((item, index) => (
+              <NavLink
                 key={index}
-                href={`#${link.toLowerCase().replace(/\s+/g, "")}`}
-                className="text-gray-800 hover:text-red-600 font-medium transition"
-                onClick={() => setIsOpen(false)} // close menu on click
+                to={item.path}
+                className={({ isActive }) => 
+                  `py-2 font-medium transition ${
+                    isActive 
+                      ? "text-red-600" 
+                      : "text-gray-800 hover:text-red-600"
+                  }`
+                }
+                onClick={() => setIsOpen(false)} 
               >
-                {link}
-              </a>
+                {item.name}
+              </NavLink>
             ))}
           </div>
         </div>
