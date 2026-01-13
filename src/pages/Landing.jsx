@@ -6,16 +6,13 @@ import HeroSection from '../components/HeroSection'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
-
 const Landing = () => {
   return (
     <div>
-      <Navbar />
-      <HeroSection />
+       <HeroSection />
       <ServicesSection />
       <WhyChooseUs />
       <Testimonials />
-      <Footer />
     </div>
   )
 }
